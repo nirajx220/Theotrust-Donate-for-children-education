@@ -29,10 +29,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Stripe webhook - must be before express.json() for raw body
-import stripeWebhook from './routes/webhook.routes.js';
-app.use('/api/webhook', stripeWebhook);
-
 // Request logging middleware
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
