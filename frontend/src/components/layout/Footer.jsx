@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Heart, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
+          {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <div className="bg-white rounded-full p-2">
@@ -36,26 +39,30 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Quick Links */}
           <div>
             <h4 className="font-bold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-3">
               <li><Link to="/about" className="text-gray-400 hover:text-white transition">About TheoTrust</Link></li>
               <li><Link to="/programs" className="text-gray-400 hover:text-white transition">Our Programs</Link></li>
-              <li><Link to="/events" className="text-gray-400 hover:text-white transition">Events</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white transition">Contact</Link></li>
+              <li><Link to="/events" className="text-gray-400 hover:text-white transition">Fundraising Events</Link></li>
+              <li><Link to="/accounts" className="text-gray-400 hover:text-white transition">Accounts</Link></li>
+              <li><Link to="/management" className="text-gray-400 hover:text-white transition">Management</Link></li>
             </ul>
           </div>
 
+          {/* Programs */}
           <div>
             <h4 className="font-bold text-lg mb-4">Programs</h4>
             <ul className="space-y-3">
-              <li><Link to="/programs?program=ukraine" className="text-gray-400 hover:text-white transition">Ukraine Assistance</Link></li>
-              <li><Link to="/programs?program=uk" className="text-gray-400 hover:text-white transition">UK Youngsters</Link></li>
-              <li><Link to="/programs?program=overseas" className="text-gray-400 hover:text-white transition">Overseas Youngsters</Link></li>
+              <li><Link to="/programs/ukraine" className="text-gray-400 hover:text-white transition">Ukraine Assistance</Link></li>
+              <li><Link to="/programs/uk" className="text-gray-400 hover:text-white transition">UK Youngsters</Link></li>
+              <li><Link to="/programs/overseas" className="text-gray-400 hover:text-white transition">Overseas Youngsters</Link></li>
               <li><Link to="/donate" className="text-gray-400 hover:text-white transition">Donate</Link></li>
             </ul>
           </div>
 
+          {/* Contact Info */}
           <div>
             <h4 className="font-bold text-lg mb-4">Contact Info</h4>
             <ul className="space-y-4">
@@ -63,18 +70,14 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-gray-400 mt-1" />
                 <div>
                   <p className="text-sm text-gray-400">Email</p>
-                  <a href="mailto:info@theotrust.org" className="text-white hover:text-gray-300">
-                    info@theotrust.org
-                  </a>
+                  <a href="mailto:info@theotrust.org" className="text-white hover:text-gray-300">info@theotrust.org</a>
                 </div>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-gray-400 mt-1" />
                 <div>
                   <p className="text-sm text-gray-400">Phone</p>
-                  <a href="tel:+442071234567" className="text-white hover:text-gray-300">
-                    +44 20 7123 4567
-                  </a>
+                  <a href="tel:+442071234567" className="text-white hover:text-gray-300">+44 20 7123 4567</a>
                 </div>
               </li>
               <li className="flex items-start space-x-3">
@@ -89,7 +92,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-          <p>© 2024 TheoTrust. All rights reserved. Registered Charity No. 1234567</p>
+          <p>© {currentYear} TheoTrust. All rights reserved. Registered Charity No. 1234567</p>
         </div>
       </div>
     </footer>

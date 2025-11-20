@@ -1,96 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Heart, Menu, X, Users } from 'lucide-react';
+import { Heart, Users, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="bg-gray-900 rounded-full p-2">
-              <Heart className="w-6 h-6 text-white" fill="white" />
+    <nav className="bg-gray-900 text-gray-100 sticky top-0 z-50 shadow">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Brand */}
+          <Link to="/" className="flex items-center gap-3">
+            <div className="bg-white rounded-full p-2">
+              <Heart className="w-5 h-5 text-gray-900" fill="currentColor" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">TheoTrust</h1>
-              <p className="text-xs text-gray-600">Empowering Children Globally</p>
+            <div className="leading-tight">
+              <div className="text-lg font-bold">TheoTrust</div>
+              <div className="text-xs text-gray-400 -mt-1">Empowering Children Globally</div>
             </div>
           </Link>
 
+          {/* Desktop links */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/about" 
-              className={`${isActive('/about') ? 'text-gray-900 font-semibold' : 'text-gray-700'} hover:text-gray-900`}
-            >
-              About TheoTrust
-            </Link>
-            <Link 
-              to="/programs" 
-              className={`${isActive('/programs') ? 'text-gray-900 font-semibold' : 'text-gray-700'} hover:text-gray-900`}
-            >
-              Our Programs
-            </Link>
-            <Link 
-              to="/events" 
-              className={`${isActive('/events') ? 'text-gray-900 font-semibold' : 'text-gray-700'} hover:text-gray-900`}
-            >
-              Events
-            </Link>
-            <Link 
-              to="/contact" 
-              className={`${isActive('/contact') ? 'text-gray-900 font-semibold' : 'text-gray-700'} hover:text-gray-900`}
-            >
-              Contact
-            </Link>
-            <Link 
+            <Link to="/" className="text-gray-200 hover:text-white transition">Home</Link>
+            <Link to="/about" className="text-gray-200 hover:text-white transition">About TheoTrust</Link>
+            <Link to="/programs" className="text-gray-200 hover:text-white transition">Our Programs</Link>
+            <Link to="/events" className="text-gray-200 hover:text-white transition">Fundraising Events</Link>
+            <Link to="/accounts" className="text-gray-200 hover:text-white transition">Accounts</Link>
+            <Link to="/management" className="text-gray-200 hover:text-white transition">Management</Link>
+            <Link to="/contact" className="text-gray-200 hover:text-white transition">Contact</Link>
+
+            <Link
               to="/donate"
-              className="bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-gray-800 transition flex items-center space-x-2"
+              className="inline-flex items-center gap-2 bg-white text-gray-900 px-4 py-2 rounded-full font-semibold shadow-sm hover:opacity-95 transition"
             >
               <Users className="w-4 h-4" />
-              <span>Donate Now</span>
+              Donate Now
             </Link>
           </div>
 
-          <button 
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileOpen(v => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
           </button>
         </div>
 
-        {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <div className="flex flex-col space-y-4">
-              <Link to="/about" className="text-gray-700" onClick={() => setMobileMenuOpen(false)}>
-                About TheoTrust
-              </Link>
-              <Link to="/programs" className="text-gray-700" onClick={() => setMobileMenuOpen(false)}>
-                Our Programs
-              </Link>
-              <Link to="/events" className="text-gray-700" onClick={() => setMobileMenuOpen(false)}>
-                Events
-              </Link>
-              <Link to="/contact" className="text-gray-700" onClick={() => setMobileMenuOpen(false)}>
-                Contact
-              </Link>
-              <Link 
+        {/* Mobile menu */}
+        {mobileOpen && (
+          <div className="md:hidden border-t border-gray-800 pb-4 mt-2">
+            <div className="flex flex-col px-2 space-y-2">
+              <Link to="/" className="block py-2 px-3 rounded hover:bg-gray-800" onClick={() => setMobileOpen(false)}>Home</Link>
+              <Link to="/about" className="block py-2 px-3 rounded hover:bg-gray-800" onClick={() => setMobileOpen(false)}>About TheoTrust</Link>
+              <Link to="/programs" className="block py-2 px-3 rounded hover:bg-gray-800" onClick={() => setMobileOpen(false)}>Our Programs</Link>
+              <Link to="/events" className="block py-2 px-3 rounded hover:bg-gray-800" onClick={() => setMobileOpen(false)}>Fundraising Events</Link>
+              <Link to="/accounts" className="block py-2 px-3 rounded hover:bg-gray-800" onClick={() => setMobileOpen(false)}>Accounts</Link>
+              <Link to="/management" className="block py-2 px-3 rounded hover:bg-gray-800" onClick={() => setMobileOpen(false)}>Management</Link>
+              <Link to="/contact" className="block py-2 px-3 rounded hover:bg-gray-800" onClick={() => setMobileOpen(false)}>Contact</Link>
+
+              <Link
                 to="/donate"
-                className="bg-gray-900 text-white px-6 py-2 rounded-full w-full text-center"
-                onClick={() => setMobileMenuOpen(false)}
+                className="block mt-2 py-3 text-center bg-white text-gray-900 rounded-lg font-semibold"
+                onClick={() => setMobileOpen(false)}
               >
                 Donate Now
               </Link>
             </div>
           </div>
         )}
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 };
 

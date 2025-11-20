@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Globe, Heart, Users, BookOpen, Home, Lightbulb, Briefcase, MapPin, Calendar, ArrowRight } from 'lucide-react';
 
